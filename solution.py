@@ -1,7 +1,7 @@
-from collections import Counter
+from collections import Counter, defaultdict
 from operator import itemgetter
 
-visits = [ ]
+visits = defaultdict(list)
 
 def collect_places():
   while True:
@@ -12,13 +12,11 @@ def collect_places():
       print("That's not a legal city, country combination")
       continue
     city, country = place.strip().split(",")
-    visits.append((city, country))
+    visits[country].append(city)
   return visits
 
 def display_places():
-  sorted_places = sorted(visits, key = itemgetter(1,0))
-  counted_places = Counter(sorted_places)
   output = "You visited:\n"
-  for key, value in counted_places.items():
-    output += f'{key[1]}\n\t{key[0]}\t({value})\n'
+  for key, value in visits.items():
+    output += f'{key[1]}\n\t{key[0]}\t({value if value > 1 else None})\n'
   return output
