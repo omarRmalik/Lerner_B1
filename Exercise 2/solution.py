@@ -12,6 +12,8 @@ def myrange(x, y, increment):
 def myrange2(*args):
   if not args:
     raise ValueError('No arguments provided!')
+  elif len(args) == 1 and isinstance(args[0], int):
+    return myrange(x = 0, y = args[0], increment = 1)
   elif len(args) == 3 and isinstance(args[0], int) and isinstance(args[1], None) and isinstance((args[2], None)):
     return myrange(x=0, y = args[0], increment = 1)
   elif len(args) == 3 and isinstance(args[0], int) and isinstance(args[1], int) and isinstance((args[2], None)) and args[0] < args[1]:
