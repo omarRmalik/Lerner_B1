@@ -1,6 +1,6 @@
 # myrange2 that returns a list
 
-def myrange2(x, y, increment):
+def myrange2(y, x=0, increment=1):
   output = []
   current_val = x
   output.append(current_val)
@@ -11,7 +11,7 @@ def myrange2(x, y, increment):
 
 # myrange that returns a generator
 
-def myrange3(x, y, increment):
+def myrange3(y, x=0, increment=1):
   current_val = x
   yield x
   while current_val < (y - increment):
