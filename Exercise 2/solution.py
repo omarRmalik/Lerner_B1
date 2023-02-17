@@ -26,7 +26,7 @@ def myrange2(*args):
 
 # myrange that returns a generator
 
-def myrange3(y, x=0, increment=1):
+def myrange3(x, y, increment=1):
   current_val = x
   yield x
   while current_val < (y - increment):
