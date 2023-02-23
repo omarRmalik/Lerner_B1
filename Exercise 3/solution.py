@@ -5,8 +5,9 @@ def logtolist(filename):
   ip_address_pattern = re.compile(r'^\d{2}.\d{2,3}.\d{2,3}.\d{2}')
   time_stamp_pattern = re.compile(r'(\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2} \+\d{4})')
   request_pattern = re.compile(r'GET\s([^"]+)')
-  with open(filename, 'r') as infile:
-    for one_line in infile:
+  with open('filename', 'r') as infile:
+    lines = infile.read()
+    for one_line in lines:
       temp_dict = {}
       ip_address = re.match(ip_address_pattern, one_line)
       if ip_address:
@@ -26,8 +27,9 @@ def re_logtolist(filename):
   ip_address_pattern = re.compile(r'^\d{2}.\d{2,3}.\d{2,3}.\d{2}')
   time_stamp_pattern = re.compile(r'(\d{2}/\w{3}/\d{4}:\d{2}:\d{2}:\d{2} \+\d{4})')
   request_pattern = re.compile(r'GET\s([^"]+)')
-  with open(filename, 'r') as infile:
-    for one_line in infile:
+  with open('filename', 'r') as infile:
+    lines = infile.read()
+    for one_line in lines:
       temp_dict = {}
       ip_address = re.match(ip_address_pattern, one_line)
       if ip_address:
