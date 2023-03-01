@@ -47,10 +47,10 @@ class LogDicts:
         else:
             return iter(self.dicts(key=key))
 
-    def earliest(self, key=None):
+    def earliest(self):
         pass
 
-    def latest(self, key=None):
+    def latest(self):
         pass
 
     def for_ip(self, ip_address, key=None):
