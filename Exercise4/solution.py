@@ -28,7 +28,7 @@ class LogDicts:
 
         if m:
             ip_address = m.group(1)
-            timestamp = m.group(2)
+            timestamp = arrow.get(m.group(2))
             request = m.group(3)
 
         else:
