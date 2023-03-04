@@ -1,4 +1,6 @@
 import arrow
+from operator import itemgetter
+
 
 class LogDicts:
     def __init__(self, filename):
@@ -36,21 +38,21 @@ class LogDicts:
             return iter(self.dicts(key=key))
 
     def earliest(self):
-        return self.dicts(key='timestamp')[0]
+        return self.dicts(key=operator.itemgetter('timestamp'))[0]
 
     def latest(self):
-        return self.dicts(key='timestamp')[-1]
+        return self.dicts(key=operator.itemgetter('timestamp'))[-1]
 
     def for_ip(self, ip_address):
         output = []
-        for one_dict in self.dicts(key='ip_address'):
+        for one_dict in self.dicts():
             if one_dict['ip_address'] == ip_address:
                 output.append(one_dict)
         return output
 
     def for_request(self, request):
         output = []
-        for one_dict in self.dicts(key='request'):
+        for one_dict in self.dicts():
             if one_dict['request'] == request:
                 output.append(one_dict)
         return output
