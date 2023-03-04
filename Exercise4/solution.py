@@ -1,45 +1,34 @@
-import re
 from operator import itemgetter
 import arrow
 
 class LogDicts:
     def __init__(self, filename):
         with open(filename, 'r') as infile:
-            self.infile = filename.read()
+            self.infile = infile.readlines()
 
     def dicts(self, key=None):
         if key is None:
             return [self.line_to_dict(line) for line in self.infile]
         else:
-            return sorted([self.line_to_dict(line) for line in self.infile], key=key)
+            return sorted([self.line_to_dict(line) for line in self.infile], key=itemgetter(key))
 
-    def line_to_dict(self,line):
+    def line_to_dict(self, line):
         if not line.strip():
             return {}
 
-        regexp = r'''
-        ((?:\d{1,3}\.){3}\d{1,3})       # IP addresses contain four numbers (each with 1-3 digits)
-        .*                              # Junk between IP address and timestamp
-        \[([^\]]+)\]                    # Timestamp, defined to be anything between [ and ]
-        .*                              # Junk between timestamp and request
-        "(GET[^"]+)"                    # Request, starting with GET
-        '''
-        m = re.search(regexp, line, re.X)
+        ip_address = line.split()[0]
 
-        if m:
-            ip_address = m.group(1)
-            timestamp = arrow.get(m.group(2))
-            request = m.group(3)
+        timestamp_start = line.index('[') + 1
+        timestamp_end = line.index(']')
+        timestamp = line[timestamp_start:timestamp_end]
 
-        else:
-            ip_address = 'No IP address found'
-            timestamp = 'No timestamp found'
-            request = 'No request found'
+        request_start = line.index('"') + 1
+        request_end = line[request_start:].index('"')
+        request = line[request_start:request_start + request_end]
 
-        output = {'ip_address': ip_address,
-                  'timestamp': timestamp,
-                  'request': request}
-        return output
+        return {'ip_address': ip_address,
+                'timestamp': arrow.get(timestamp, 'DD/MMM/YYYY:HH:mm:ss', tzinfo='UTC'),
+                'request': request}
 
     def iterdicts(self, key=None):
         if key is None:
@@ -48,15 +37,21 @@ class LogDicts:
             return iter(self.dicts(key=key))
 
     def earliest(self):
-        pass
+        return self.dicts(key='timestamp')[0]
 
     def latest(self):
-        pass
+        return self.dicts(key='timestamp')[-1]
 
-    def for_ip(self, ip_address, key=None):
-        pass
+    def for_ip(self, ip_address):
+        output = []
+        for one_dict in self.dicts(key='ip_address'):
+            if one_dict['ip_address'] == ip_address:
+                output.append(one_dict)
+        return output
 
-    def for_request(self, text, key=None):
-        pass
-
-
+    def for_request(self, request):
+        output = []
+        for one_dict in self.dicts(key='request'):
+            if one_dict['request'] == request:
+                output.append(one_dict)
+        return output
