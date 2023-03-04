@@ -1,7 +1,6 @@
 import arrow
 import operator
 
-
 class LogDicts:
     def __init__(self, filename):
         with open(filename, 'r') as infile:
@@ -44,15 +43,11 @@ class LogDicts:
         return self.dicts(key=operator.itemgetter('timestamp'))[-1]
 
     def for_ip(self, ip_address):
-        output = []
-        for one_dict in self.dicts():
-            if one_dict['ip_address'] == ip_address:
-                output.append(one_dict)
-        return output
+        return [one_dict
+                for one_dict in self.dicts()
+                if one_dict['ip_address'] == ip_address]
 
     def for_request(self, request):
-        output = [ ]
-        for one_dict in self.dicts():
-            if request in one_dict['request']:
-                output.append(one_dict)
-        return output
+        return [one_dict
+                for one_dict in self.dicts()
+                if request in one_dict['request']]
