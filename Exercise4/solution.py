@@ -1,4 +1,3 @@
-from operator import itemgetter
 import arrow
 
 class LogDicts:
@@ -10,7 +9,7 @@ class LogDicts:
         if key is None:
             return [self.line_to_dict(line) for line in self.infile]
         else:
-            return sorted([self.line_to_dict(line) for line in self.infile], key=itemgetter(key))
+            return sorted([self.line_to_dict(line) for line in self.infile], key=key)
 
     def line_to_dict(self, line):
         if not line.strip():
