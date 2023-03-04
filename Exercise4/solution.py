@@ -1,5 +1,5 @@
 import arrow
-from operator import itemgetter
+import operator
 
 
 class LogDicts:
