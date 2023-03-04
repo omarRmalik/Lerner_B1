@@ -51,7 +51,7 @@ class LogDicts:
         return output
 
     def for_request(self, request):
-        output = []
+        output = [ ]
         for one_dict in self.dicts():
             if request in one_dict['request']:
                 output.append(one_dict)
