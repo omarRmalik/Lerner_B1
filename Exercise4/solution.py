@@ -53,6 +53,6 @@ class LogDicts:
     def for_request(self, request):
         output = []
         for one_dict in self.dicts():
-            if one_dict['request'] == request:
+            if request in one_dict['request']:
                 output.append(one_dict)
         return output
