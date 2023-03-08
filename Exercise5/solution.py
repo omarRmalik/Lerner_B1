@@ -15,4 +15,4 @@ def cities_to_csv(url, filename):
             for one_dict in infile:
                 file_writer.writerow([one_dict['city'], one_dict['state'], one_dict['rank'], one_dict['population']])
     else:
-        print('Request failed with status cose{response.status_code}')
+        print('Request failed with status code{response.status_code}')
