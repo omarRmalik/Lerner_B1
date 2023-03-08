@@ -10,7 +10,7 @@ def cities_to_csv(url, filename):
     if response.status_code == 200:
         infile = response.json()
 
-        with open(filename, 'w') as outfile:
+        with open(filename, 'w', newline='') as outfile:
             file_writer = csv.writer(outfile, delimiter='\t')
             for one_dict in infile:
                 file_writer.writerow([one_dict['city'], one_dict['state'], one_dict['population'], one_dict['rank']])
