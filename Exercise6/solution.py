@@ -12,10 +12,11 @@ def average_age_under(people, limit):
                 one_person['age'] <= limit]) / len(people)
 
 def all_hobbies(people):
-    pass
+    return set(one_person['hobbies']
+                for one_person in people)
 
 def hobby_counter(people):
-    pass
+    return Counter(people['hobbies'])
 
 def n_most_common(people):
-    pass
+    return Counter(people['hobbies']).most_common(3)
