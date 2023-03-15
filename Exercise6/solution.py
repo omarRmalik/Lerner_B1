@@ -10,7 +10,9 @@ def average_age_under(people, limit):
     return sum([one_person['age']
                 for one_person in people
                 if one_person['age'] >= 1 and
-                one_person['age'] <= limit]) / len(people)
+                one_person['age'] <= limit]) / len([one_person
+                                                    for one_person in people
+                                                    if one_person['age'] <= limit])
 
 
 def all_hobbies(people):
