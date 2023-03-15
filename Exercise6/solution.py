@@ -1,4 +1,5 @@
 from collections import Counter
+from statistics import mean
 
 all_people = [{'name': 'Reuven', 'age': 50, 'hobbies': ['Python', 'cooking', 'reading']},
               {'name': 'Atara', 'age': 20, 'hobbies': ['horses', 'cooking', 'art', 'reading']},
@@ -7,13 +8,12 @@ all_people = [{'name': 'Reuven', 'age': 50, 'hobbies': ['Python', 'cooking', 're
 
 
 def average_age_under(people, limit):
-    return sum([one_person['age']
-                for one_person in people
-                if one_person['age'] >= 1 and
-                one_person['age'] <= limit]) / len([one_person
-                                                    for one_person in people
-                                                    if one_person['age'] <= limit])
-
+    filtered_list = [one_person['age']
+                     for one_person in people
+                     if one_person['age'] >= 1 and
+                     one_person['age'] <= limit]
+    if filtered_list:
+        return mean(filtered_list)
 
 def all_hobbies(people):
     return set(one_hobby
