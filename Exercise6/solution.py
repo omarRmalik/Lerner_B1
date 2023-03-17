@@ -23,5 +23,5 @@ def all_hobbies(people):
 def hobby_counter(people):
     return Counter(people['hobbies'])
 
-def n_most_common(people):
-    return Counter(people['hobbies']).most_common(3)
+def n_most_common(people, n):
+    return Counter(people['hobbies']).most_common(n)
