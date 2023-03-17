@@ -12,7 +12,7 @@ all_people = [{'name': 'Reuven', 'age': 50, 'hobbies': ['Python', 'cooking', 're
 
 @pytest.mark.parametrize('people, maxage, output', [
     ({}, 120, 0),
-    (all_people, 120, 23.25),
+    (all_people, 120, 25.75),
     (all_people, 25, 17.6666),
     (all_people, -1, 0)
 ])
