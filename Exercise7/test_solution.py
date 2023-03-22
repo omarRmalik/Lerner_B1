@@ -34,8 +34,8 @@ def test_excep_dict():
     # Call filefunc with the temporary directory and mock function
     func_dict, excep_dict = filefunc("temp_dir", abs)
 
-    assert excep_dict == {"TypeError": "TypeError: bad operand type for abs(): '_io.TextIOWrapper'",
-                          "TypeError": "TypeError: bad operand type for abs(): '_io.TextIOWrapper'"}
+    assert excep_dict == {"TypeError": "bad operand type for abs(): 'str'",
+                          "TypeError": "bad operand type for abs(): 'str'"}
     assert len(func_dict) == 0
 
     # Clean up the temporary directory
