@@ -7,6 +7,7 @@ def test_filefunc():
 
     # Create a temporary directory and some files to test with
     os.makedirs("temp_dir")
+    os.makedirs("temp_dir/subdir")
     open("temp_dir/file1.txt", "w").close()
     open("temp_dir/file2.txt", "w").close()
     open("temp_dir/subdir/file3.txt", "w").close()
