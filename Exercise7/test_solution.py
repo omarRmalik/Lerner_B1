@@ -1,4 +1,5 @@
 import os
+from solution import filefunc
 
 def test_filefunc():
     def mock_func(path):
