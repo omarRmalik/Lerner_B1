@@ -18,8 +18,12 @@ class Tee:
       except Exception as e:
         print(e)
 
+  def close(self):
+    for one_file in self.args:
+      one_file.close()
+
   def __enter__(self):
     return self
 
-  def __exit__(self):
-    return self
+  def __exit__(self, exc_type, exc_val, exc_tb):
+    self.close()
