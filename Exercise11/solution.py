@@ -3,8 +3,7 @@ from pathlib import Path
 
 class DirFileHash(object):
   def __init__(self, directory):
-    h = hashlib.new('md5')
-    self.dirname = h.update(directory.encode())
+    self.dirname = hashlib.md5(directory.encode('utf-8')).hexdigest()
     self.directory = directory
     self.data = { }
     for file_path in self.directory:
