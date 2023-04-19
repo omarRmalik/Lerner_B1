@@ -5,7 +5,7 @@ class DirFileHash(object):
   def __init__(self, directory):
     h = hashlib.new('md5')
     self.dirname = h.update(directory.encode())
-    self.directory = Path(directory)
+    self.directory = directory
     self.data = { }
     for file_path in self.directory.iterdir():
       if file_path.is_file():
