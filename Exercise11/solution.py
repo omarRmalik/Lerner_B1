@@ -1,3 +1,4 @@
+import os
 import hashlib
 
 class DirFileHash(object):
@@ -7,7 +8,8 @@ class DirFileHash(object):
         self.dirname = hashlib.md5(directory_encoded).hexdigest()
 
         self.data = {}
-        for file_path in self.directory:
+        for filename in os.listdir(directory):
+            file_path = os.path.join(directory, filename)
             with open(file_path, 'rb') as infile:
                 data = infile.read()
                 self.data[file_path] = hashlib.md5(data).hexdigest()
