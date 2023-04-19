@@ -7,7 +7,7 @@ class DirFileHash(object):
     self.dirname = h.update(directory.encode())
     self.directory = directory
     self.data = { }
-    for file_path in self.directory.iterdir():
+    for file_path in self.directory:
       if file_path.is_file():
         with open(file_path, 'rb') as infile:
           data = infile.read()
