@@ -1,24 +1,18 @@
 import hashlib
 import os
 
-
 class DirFileHash(object):
-    def __init__(self, directory):
-        if os.path.isdir(directory) and os.path.listdir(directory):
-            self.directory = directory
-            directory_encoded = self.directory.encode('utf-8')
-            self.dirname = hashlib.md5(directory_encoded).hexdigest()
-
-            self.data = {}
-
-            for one_filename in os.listdir(directory):
-                m = md5()
-                content = getattr(string, one_filename).encode()
-                m.update(content)
-                self.data[one_filename] = m.hexdigest()
-
-        else:
+    def __init__(self, dirname):
+        self.dirname = dirname
+        self.data = {}
+        if not os.path.exists(dirname):
             return None
+        else:
+            for one_filename in os.listdir(dirname):
+                file_path = os.path.join(dirname, one_filename)
+                with open(file_path, 'rb') as infile:
+                    digest = hashlib.md5(infile.read())
+                    self.data[one_filename] = digest.hexdigest()
 
     def __getitem__(self, key):
-        return self.data[key]
+        return self.data.get(key, None)
